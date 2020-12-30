@@ -17,6 +17,7 @@ const (
 	AlignCenter               // "   center   "
 	AlignJustify              // "justify   it"
 	AlignRight                // "       right"
+	AlignWeChat
 )
 
 // Apply aligns the text as directed. For ex.:
@@ -35,6 +36,10 @@ func (a Align) Apply(text string, maxLength int) string {
 	switch a {
 	case AlignDefault, AlignLeft:
 		return fmt.Sprintf("%-"+strconv.Itoa(maxLength+numEscChars)+"s", text)
+	case AlignWeChat:
+		data := fmt.Sprintf("%-"+strconv.Itoa(maxLength+numEscChars)+"s", text)
+		c := strings.Count(data, " ")
+		return data + strings.Repeat(" ", c)
 	case AlignCenter:
 		if sLenWoE < maxLength {
 			// left pad with half the number of spaces needed before using %text

@@ -111,14 +111,14 @@ func (t *Table) renderColumnAutoIndex(out *strings.Builder, hint renderHint) {
 			utf8.RuneCountInString(t.style.Box.PaddingRight)
 		chars := t.style.Box.MiddleHorizontal
 		if hint.isAutoIndexColumn && hint.isHeaderOrFooterSeparator() {
-			chars = text.RepeatAndTrim(" ", len(t.style.Box.MiddleHorizontal))
+			chars = text.RepeatAndTrim("  ", len(t.style.Box.MiddleHorizontal))
 		}
 		outAutoIndex.WriteString(text.RepeatAndTrim(chars, numChars))
 	} else {
 		outAutoIndex.WriteString(t.style.Box.PaddingLeft)
 		rowNumStr := fmt.Sprint(hint.rowNumber)
 		if hint.isHeaderRow || hint.isFooterRow || hint.rowLineNumber > 1 {
-			rowNumStr = strings.Repeat(" ", t.autoIndexVIndexMaxLength)
+			rowNumStr = strings.Repeat("  ", t.autoIndexVIndexMaxLength)
 		}
 		outAutoIndex.WriteString(text.AlignRight.Apply(rowNumStr, t.autoIndexVIndexMaxLength))
 		outAutoIndex.WriteString(t.style.Box.PaddingRight)

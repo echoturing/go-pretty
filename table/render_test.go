@@ -2,6 +2,7 @@ package table
 
 import (
 	"fmt"
+	"os"
 	"sort"
 	"strings"
 	"testing"
@@ -1290,4 +1291,24 @@ func TestTable_Render_SetWidth_Title(t *testing.T) {
 		assert.Equal(t, strings.Join(expectedOut, "\n"), tw.Render())
 	})
 
+}
+
+func TestX(t *testing.T) {
+	w := NewWriter()
+	w.SetColumnConfigs([]ColumnConfig{
+		{Number: 1, Align: text.AlignWeChat, AlignHeader: text.AlignWeChat, AlignFooter: text.AlignWeChat},
+		{Number: 2, Align: text.AlignWeChat, AlignHeader: text.AlignWeChat, AlignFooter: text.AlignWeChat},
+		{Number: 3, Align: text.AlignWeChat, AlignHeader: text.AlignWeChat, AlignFooter: text.AlignWeChat},
+		{Number: 4, Align: text.AlignWeChat, AlignHeader: text.AlignWeChat, AlignFooter: text.AlignWeChat},
+		{Number: 5, Align: text.AlignWeChat, AlignHeader: text.AlignWeChat, AlignFooter: text.AlignWeChat},
+		{Number: 6, Align: text.AlignWeChat, AlignHeader: text.AlignWeChat, AlignFooter: text.AlignWeChat},
+		{Number: 7, Align: text.AlignWeChat, AlignHeader: text.AlignWeChat, AlignFooter: text.AlignWeChat},
+	})
+	w.AppendHeader([]interface{}{"中文title", "xxxxooooo"})
+	w.AppendRows([]Row{
+		{"xxx", "nnnn", "safdsf中"},
+		{"中文xxx", "555555555", "dsfsdf哦"},
+	})
+	w.SetOutputMirror(os.Stdout)
+	w.Render()
 }
